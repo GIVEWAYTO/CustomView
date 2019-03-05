@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ken.customview">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -26,7 +28,9 @@
         <activity android:name=".RippleActivity" />
         <activity android:name=".RemoteControlMenuActivity" />
         <activity android:name=".LoadingActivity" />
-        <activity android:name=".SnapHelperActivity"></activity>
+        <activity android:name=".SnapHelperActivity" />
+        <activity android:name=".ScrollActivity" />
+        <activity android:name=".ProgressActivity"></activity>
     </application>
 
 </manifest>

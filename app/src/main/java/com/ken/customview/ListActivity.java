@@ -35,7 +35,11 @@ public class ListActivity extends AppCompatActivity {
         data.add(new ItemBean("水波扩散",RippleActivity.class));
         data.add(new ItemBean("特殊控件的事件处理",RemoteControlMenuActivity.class));
         data.add(new ItemBean("畸形进度条",LoadingActivity.class));
+        data.add(new ItemBean("SnapHelper辅助RV的滑动事件",SnapHelperActivity.class));
+        data.add(new ItemBean("Scroll",ScrollActivity.class));
+        data.add(new ItemBean("进度条",ProgressActivity.class));
         setAdatapter();
+
     }
 
     private void setAdatapter() {

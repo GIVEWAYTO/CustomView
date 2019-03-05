@@ -1,15 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LottieActivity">
     <com.airbnb.lottie.LottieAnimationView
-        android:background="@color/colorAccent"
+
         app:lottie_loop="true"
         app:lottie_autoPlay="true"
+        android:layout_weight="1"
         app:lottie_fileName="data.json"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</RelativeLayout>
+        android:layout_height="0dp" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true"
+        android:layout_weight="1"
+        android:id="@+id/load"
+        android:background="@android:color/white"
+        app:lottie_fileName="load.json"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        app:lottie_imageAssetsFolder="images/"
+        app:lottie_fileName="anim_refresh.json"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp" />
+    <com.airbnb.lottie.LottieAnimationView
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        app:lottie_fileName="new1.json"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp" />
+</LinearLayout>

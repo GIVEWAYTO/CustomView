@@ -28,7 +28,7 @@ public class RippleView extends View {
     private List<RippleBean> beanList;
 
     /**
-     * 每次水波纹增加的半径
+     * 两个水波纹之间的半径差
      */
     private float RIPPLE_INTEVAL = Utils.dpToPixel(50);
 
@@ -162,6 +162,7 @@ public class RippleView extends View {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
 
+                // 如果大于最后一个圆半径大于 RIPPLE_INTEVAL，那么生成第二个圆
                 if (beanList.size() > 0 && beanList.get(beanList.size() - 1).radius > RIPPLE_INTEVAL) {
                     int r = random.nextInt(256);
                     int g = random.nextInt(256);
@@ -174,7 +175,6 @@ public class RippleView extends View {
 
                 for (RippleBean bean : beanList) {
                     if (bean.radius < size / 2)
-
                         bean.radius += speed;
                     bean.alpha = 255.0f * (size / 2 - bean.radius - 15) / (size / 2);
                 }
