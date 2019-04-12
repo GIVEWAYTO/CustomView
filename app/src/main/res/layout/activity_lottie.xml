@@ -26,20 +26,18 @@
         android:layout_height="0dp" />
 
     <com.airbnb.lottie.LottieAnimationView
-        app:lottie_loop="true"
+        android:background="@android:color/holo_green_dark"
+        android:scaleType="centerCrop"
         app:lottie_autoPlay="true"
-        android:layout_weight="1"
-        android:background="@android:color/white"
-        app:lottie_imageAssetsFolder="images/"
-        app:lottie_fileName="anim_refresh.json"
+        app:lottie_fileName="zzz.json"
         android:layout_width="wrap_content"
-        android:layout_height="0dp" />
-    <com.airbnb.lottie.LottieAnimationView
-        app:lottie_loop="true"
-        app:lottie_autoPlay="true"
-        android:layout_weight="1"
-        android:background="@android:color/white"
-        app:lottie_fileName="new1.json"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp" />
+        android:layout_height="wrap_content" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/voice_anim"
+            android:scaleType="centerCrop"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+
+
 </LinearLayout>

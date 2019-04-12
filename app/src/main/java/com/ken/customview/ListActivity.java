@@ -27,6 +27,7 @@ public class ListActivity extends AppCompatActivity {
         rv.addItemDecoration(new SuperDividerItemDecoration.Builder(this)
                 .build());
         data.add(new ItemBean("蜘蛛视图",PathActivity.class));
+        data.add(new ItemBean("高仿头条上拉效果",WeboActivity.class));
         data.add(new ItemBean("旋转飞机",PlaneActivity.class));
         data.add(new ItemBean("搜索动画",SearchActivity.class));
         data.add(new ItemBean("点击成功按钮动画",SuccessActivity.class));

@@ -41,4 +41,6 @@ public class PathTestView extends View {
         path.close();
         canvas.drawPath(path,paint);
     }
+
+
 }

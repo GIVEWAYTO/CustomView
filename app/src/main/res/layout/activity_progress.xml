@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".ProgressActivity">
-   <com.ken.customview.RoundRectView
+   <com.ken.customview.RoundRectWaveView
        android:id="@+id/round"
        android:layout_marginTop="60dp"
        android:layout_gravity="center"
@@ -19,5 +19,31 @@
         android:layout_marginLeft="20dp"
         android:layout_width="50dp"
         android:layout_height="94dp" />
+
+    <RelativeLayout
+        android:layout_marginLeft="50dp"
+        android:elevation="5dp"
+
+
+
+
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.ken.customview.RoundRectView
+
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="60dp"
+            app:lottie_loop="true"
+            app:lottie_fileName="pp.json"
+            app:lottie_autoPlay="true"
+            app:lottie_colorFilter="#7E9BDB"
+            android:layout_height="60dp" />
+    </RelativeLayout>
+
+
 
 </LinearLayout>

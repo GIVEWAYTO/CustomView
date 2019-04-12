@@ -3,7 +3,7 @@
     package="com.ken.customview">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -30,7 +30,12 @@
         <activity android:name=".LoadingActivity" />
         <activity android:name=".SnapHelperActivity" />
         <activity android:name=".ScrollActivity" />
-        <activity android:name=".ProgressActivity"></activity>
+        <activity android:name=".ProgressActivity" />
+        <activity
+            android:name=".WeboActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
     </application>
 
 </manifest>

@@ -1,7 +1,5 @@
 package com.ken.customview;
 
-import android.bluetooth.BluetoothA2dp;
-import android.graphics.BlurMaskFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,15 +17,15 @@ public class ProgressActivity extends AppCompatActivity {
         findViewById(R.id.round).postDelayed(new Runnable() {
             @Override
             public void run() {
-                ((RoundRectView) findViewById(R.id.round)).initWaveAnim();
-                ((RoundRectView) findViewById(R.id.round)).setProgress(62);
+                ((RoundRectWaveView) findViewById(R.id.round)).initWaveAnim();
+                ((RoundRectWaveView) findViewById(R.id.round)).setProgress(62);
                 headestBatteryView.initWaveAnim();
                 headestBatteryView.setProgress(82);
 
             }
         }, 50);
         progress = 0;
-        final RoundRectView roundRectView = findViewById(R.id.round);
+        final RoundRectWaveView roundRectView = findViewById(R.id.round);
         findViewById(R.id.round).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
