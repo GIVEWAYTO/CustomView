@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/ear_l"
+        android:layout_width="@dimen/dp_9"
+        android:layout_height="@dimen/dp_30"
+        android:layout_marginTop="11dp"
+        app:srcCompat="@drawable/vector_drawable_eeee" />
+
+    <com.ken.customview.HeadestBatteryView2
+        android:id="@+id/battery"
+        android:layout_width="@dimen/dp_46"
+        android:layout_height="@dimen/dp_86"
+        android:layout_marginLeft="@dimen/dicrease_dp_2"
+        android:layout_toRightOf="@id/ear_l" />
+</RelativeLayout>

@@ -14,20 +14,38 @@
        android:layout_height="102dp" />
 
 
-    <com.ken.customview.HeadestBatteryView
-        android:id="@+id/view1"
-        android:layout_marginLeft="20dp"
-        android:layout_width="50dp"
-        android:layout_height="94dp" />
+        <com.ken.customview.HeadestBatteryView
+            android:id="@+id/view1"
+            android:layout_marginLeft="20dp"
+            android:layout_width="46dp"
+            android:layout_height="94dp" />
+
+
+    <RelativeLayout
+        android:layout_marginLeft="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.AppCompatImageView
+            app:srcCompat="@drawable/vector_drawable_eeee"
+            android:id="@+id/ear_l"
+            android:layout_marginTop="11dp"
+            android:layout_width="9dp"
+            android:layout_height="30dp" />
+        <com.ken.customview.HeadestBatteryView2
+            android:layout_toRightOf="@id/ear_l"
+            android:id="@+id/view2"
+            android:layout_marginLeft="-2dp"
+            android:layout_width="46dp"
+            android:layout_height="86dp" />
+    </RelativeLayout>
+
+    <com.ken.customview.EarphoneBatteryView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <RelativeLayout
         android:layout_marginLeft="50dp"
         android:elevation="5dp"
-
-
-
-
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 

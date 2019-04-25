@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android" android:viewportWidth="18"
+    android:viewportHeight="60" android:width="18dp" android:height="60dp">
+    <path android:fillColor="#FF000000" android:name="椭圆_2042_拷贝_3"
+        android:pathData="M5 32c0-22.95 0.448 33.73 0.448 28.43C13.23 52.25 18 42 18 32C18 20.6 12.792 6.219 0 0 C6.735 12.84 5 38.219 5 32z" />
+</vector>

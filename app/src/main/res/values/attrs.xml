@@ -9,5 +9,18 @@
         <attr name="ringColor" format="color"/>
         <attr name="ringBgColor" format="color"/>
     </declare-styleable>
+    <!--耳机电量-->
+    <declare-styleable name="HeadestBatteryView">
+        <attr name="battery" />
+    </declare-styleable>
+
+
+
+
+
+
+
+
+
 
 </resources>

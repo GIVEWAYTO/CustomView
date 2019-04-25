@@ -8,6 +8,16 @@
     tools:context=".LottieActivity">
     <com.airbnb.lottie.LottieAnimationView
 
+        android:background="#22ff0000"
+
+        android:id="@+id/lottie"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <com.airbnb.lottie.LottieAnimationView
+
         app:lottie_loop="true"
         app:lottie_autoPlay="true"
         android:layout_weight="1"

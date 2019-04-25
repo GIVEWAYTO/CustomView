@@ -54,37 +54,54 @@ public class LottieActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lottie);
         AppCompatImageView imageView = new AppCompatImageView(this);
 
-        TextView textView = new TextView(this);
-        final LottieAnimationView voice_anim = findViewById(R.id.voice_anim);
 
-        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-        if (mAudioManager != null) {
-            int streamVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-            Log.e("zz", "onCreate:音量  == "   + streamVolume + "   " + mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC) );
-        }
+
+
+
+
+        LottieAnimationView lottie = findViewById(R.id.lottie);
+        lottie.setScale(0.5f);
+        lottie.setImageAssetsFolder("ccs/");
+        lottie.setAnimation("b.json");
+        lottie.loop(true);
+        lottie.playAnimation();
+
+
+
+
+
+//        TextView textView = new TextView(this);
+//        final LottieAnimationView voice_anim = findViewById(R.id.voice_anim);
+//
+//        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+//        if (mAudioManager != null) {
+//            int streamVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+//            Log.e("zz", "onCreate:音量  == "   + streamVolume + "   " + mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC) );
+//        }
 //        KeyPath keyPath = new KeyPath("**");
 //        SimpleColorFilter filter = new SimpleColorFilter(Color.BLACK);
 //        LottieValueCallback<ColorFilter> callback = new LottieValueCallback<ColorFilter>(filter);
-        voice_anim.setAnimation("tt.json");
-
-        voice_anim.playAnimation();
 //        voice_anim.addValueCallback(keyPath, LottieProperty.COLOR_FILTER, callback);
-        voice_anim.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                voice_anim.playAnimation();
-            }
-        });
-//        String jsonString = getJson("ccc.json", this);
-//        final PorterDuffColorFilter colorFilter = new PorterDuffColorFilter(Color.RED, PorterDuff.Mode.LIGHTEN);
-//        voice_anim.addColorFilter(colorFilter);
-
-        registerVolumeReceiver();
-        WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
-        DisplayMetrics dm = new DisplayMetrics();
-        wm.getDefaultDisplay().getMetrics(dm);
-        float den = dm.density;
-        Log.e("zz", "onCreate: ss == " +den );
+//
+//        voice_anim.setAnimation("tt.json");
+//
+//        voice_anim.playAnimation();
+//        voice_anim.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                voice_anim.playAnimation();
+//            }
+//        });
+////        String jsonString = getJson("ccc.json", this);
+////        final PorterDuffColorFilter colorFilter = new PorterDuffColorFilter(Color.RED, PorterDuff.Mode.LIGHTEN);
+////        voice_anim.addColorFilter(colorFilter);
+//
+//        registerVolumeReceiver();
+//        WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
+//        DisplayMetrics dm = new DisplayMetrics();
+//        wm.getDefaultDisplay().getMetrics(dm);
+//        float den = dm.density;
+//        Log.e("zz", "onCreate: ss == " +den );
 
 //        final LottieAnimationView load = findViewById(R.id.load);
 //        ValueAnimator animator = ValueAnimator.ofFloat(0f, 1f)

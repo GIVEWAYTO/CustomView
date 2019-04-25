@@ -14,13 +14,16 @@ public class ProgressActivity extends AppCompatActivity {
         setContentView(R.layout.activity_progress);
 
         final HeadestBatteryView headestBatteryView = (HeadestBatteryView) findViewById(R.id.view1);
+        final HeadestBatteryView2 view2 = findViewById(R.id.view2);
         findViewById(R.id.round).postDelayed(new Runnable() {
             @Override
             public void run() {
                 ((RoundRectWaveView) findViewById(R.id.round)).initWaveAnim();
                 ((RoundRectWaveView) findViewById(R.id.round)).setProgress(62);
                 headestBatteryView.initWaveAnim();
+                view2.initWaveAnim();
                 headestBatteryView.setProgress(82);
+                view2.setProgress(25);
 
             }
         }, 50);
@@ -32,6 +35,7 @@ public class ProgressActivity extends AppCompatActivity {
                 progress +=5;
                 if(progress>100)progress = 0;
                 roundRectView.setProgress(progress);
+                view2.setProgress(progress);
                 headestBatteryView.setProgress(progress);
             }
         });

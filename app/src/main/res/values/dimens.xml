@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dp_9">9dp</dimen>
+    <dimen name="dp_30">30dp</dimen>
+    <dimen name="dp_46">46dp</dimen>
+    <dimen name="dp_86">86dp</dimen>
+    <dimen name="dicrease_dp_2">-2dp</dimen>
+</resources>

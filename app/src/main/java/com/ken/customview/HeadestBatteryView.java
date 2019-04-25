@@ -2,6 +2,7 @@ package com.ken.customview;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -14,23 +15,24 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
+import com.scwang.smartrefresh.layout.util.DensityUtil;
+
 import static android.view.animation.Animation.INFINITE;
 
 public class HeadestBatteryView extends View {
     private RectF oval;    // 圆弧的矩形框
     private Paint paint;
-    private int step = (int) Utils.dpToPixel(1.5f);
+    private int step = (int) DensityUtil.dp2px(1.5f);
     private float strokeWidth;
     private Path path;
 
-    private Path mPath;//路径
     private Paint mPaint, mPaintMore;//画笔
     private PointF drawPoint, drawPoint2;//绘制点
     private ValueAnimator animator;
     private float mWidth, mHeight, waveHeight;//控件宽，控件高，水位
-    private float waveDeepmin = Utils.dpToPixel(2);//最小的波峰与波谷
-    private float waveDeepMax = Utils.dpToPixel(3);//最大的波峰与波谷
-    private float waveDeep = Utils.dpToPixel(2);//波峰与波谷
+    private float waveDeepmin = DensityUtil.dp2px(2);//最小的波峰与波谷
+    private float waveDeepMax = DensityUtil.dp2px(3);//最大的波峰与波谷
+    private float waveDeep = DensityUtil.dp2px(2);//波峰与波谷
     private static final double WAVE_SPEED = 48;   //波浪运动的速度
     private String MAINCOLOR_DEF = "#7e9bdb", NEXTCOLOR_DEF = "#7e9bdb";//默认颜色
     private int mainColor = Color.parseColor(MAINCOLOR_DEF), nextColor = Color.parseColor(NEXTCOLOR_DEF);//颜色
@@ -38,7 +40,7 @@ public class HeadestBatteryView extends View {
     private RectF fillRectF;   // 在裁剪canvas时，填充path
     private int baseline;
     private final int maxProgress = 100;    //最大进度
-    private float progress = 50;    //当前进度
+    private int progress = 50;    //当前进度
     private float progressWidth;    //圆环的半径
     private int progressColor;
     private Rect rect;
@@ -47,23 +49,28 @@ public class HeadestBatteryView extends View {
         this(context, null);
     }
 
-
-
     public HeadestBatteryView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
     public HeadestBatteryView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.HeadestBatteryView);
+        try {
+            progress = typedArray.getInteger(R.styleable.HeadestBatteryView_battery,0);
+        } finally {
+            if (typedArray != null) typedArray.recycle();
+        }
+
         paint = new Paint();
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.STROKE);
         paint.setColor(Color.parseColor("#7e9bdb"));
-        strokeWidth = Utils.dpToPixel(2);
+        strokeWidth = DensityUtil.dp2px(2);
         paint.setStrokeWidth(strokeWidth);
         path = new Path();
 
-        mPath = new Path();
         mPaint = new Paint();
         mPaint.setColor(mainColor);//设置颜色
         mPaint.setAntiAlias(true);//抗锯齿(性能影响)
@@ -80,8 +87,9 @@ public class HeadestBatteryView extends View {
 
         oval = new RectF();
         rect = new Rect();
-        paint.setTextSize(Utils.dpToPixel(12));
+        paint.setTextSize(DensityUtil.dp2px(12));
         paint.getTextBounds(getProgressText(), 0, getProgressText().length(), rect);
+
 
     }
 
@@ -137,6 +145,10 @@ public class HeadestBatteryView extends View {
         }
     }
 
+    public int getProgress() {
+        return progress;
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -163,7 +175,6 @@ public class HeadestBatteryView extends View {
         // 获得 波浪的裁剪区域
         getStrokePath(0);
         // 保存画布当前状态
-        canvas.save();
         path.addRect(fillRectF, Path.Direction.CW);
 
         canvas.clipPath(path);
@@ -190,22 +201,21 @@ public class HeadestBatteryView extends View {
             //跳到下一个点继续
             drawPoint.x++;
         }
-        // 将画布还原成裁剪前的状态
-        canvas.restore();
+
         // 绘制进度条
         paint.setAlpha(255);
-        paint.setStrokeWidth(Utils.dpToPixel(5));
-        canvas.drawCircle(getMeasuredWidth() / 2, getMeasuredHeight() * 0.1f + progressWidth, progressWidth +Utils.dpToPixel(1f), paint); //画出圆
+        paint.setStrokeWidth(DensityUtil.dp2px(5));
+        canvas.drawCircle(getMeasuredWidth() / 2, getMeasuredHeight() * 0.1f + progressWidth, progressWidth +DensityUtil.dp2px(1f), paint); //画出圆
 
 
         paint.setColor(Color.WHITE);
-        canvas.drawArc(oval, 270, 360 * ((100 - progress) / maxProgress), false, paint);  //根据进度画圆弧
+        canvas.drawArc(oval, 270, 360 * (((float)(100 - progress)) / maxProgress), false, paint);  //根据进度画圆弧
 
         paint.setStyle(Paint.Style.FILL);
-        paint.setColor(Color.WHITE);
-        canvas.drawCircle(getMeasuredWidth() / 2, getMeasuredHeight() * 0.1f + progressWidth, progressWidth + Utils.dpToPixel(1f), paint); //画出圆
+
+        canvas.drawCircle(getMeasuredWidth() / 2, getMeasuredHeight() * 0.1f + progressWidth, progressWidth + DensityUtil.dp2px(1f), paint); //画出圆
         paint.setStrokeWidth(0);
-        paint.setColor(Color.parseColor("#333333"));
+        paint.setColor(getResources().getColor(R.color.c_333333));
         //拿到字符串的宽度
         float stringWidth = paint.measureText(getProgressText());
         float x = (getMeasuredWidth() - stringWidth) / 2;
@@ -214,7 +224,7 @@ public class HeadestBatteryView extends View {
 
     //中间的进度百分比
     private String getProgressText() {
-        return ((int) progress) + "%";
+        return progress + "%";
     }
 
     private void getStrokePath(int i) {
@@ -248,6 +258,13 @@ public class HeadestBatteryView extends View {
         animator.setRepeatMode(ValueAnimator.REVERSE);//往返模式
         animator.setRepeatCount(INFINITE);
         animator.start();
+    }
+
+    public void destory(){
+        if(animator!=null){
+            animator.cancel();
+            animator = null;
+        }
     }
 
     private float getLeft(int i) {

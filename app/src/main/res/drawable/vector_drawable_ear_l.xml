@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android" android:viewportWidth="18"
+    android:viewportHeight="60" android:width="18dp" android:height="60dp">
+    <path android:name="椭圆_2042_拷贝_2" android:fillColor="#7E9BDB"
+        android:pathData="M610 3845c0-22.95 -0.448 33.73-0.448 28.43C601.769 3865.25 597 3855 597 3845c0-11.4 5.208-25.78 18-32C608.265 3825.84 610 3851.22 610 3845Z" />
+</vector>

@@ -14,9 +14,13 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
+import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 
 public class WeboActivity extends AppCompatActivity {
     private int totalDy = 0;
+    private float bottomHeight;  // 固定的底部 高度
+    private float stickyHeight = Utils.dpToPixel(80);  // 固定的底部 高度
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,24 +28,26 @@ public class WeboActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);// 设置全屏
         setContentView(R.layout.activity_webo);
-        WindowManager manager = this.getWindowManager();
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        manager.getDefaultDisplay().getMetrics(outMetrics);
-        final int height = (int) (outMetrics.heightPixels - Utils.dpToPixel(50)); // 全屏减去底部固定view的高度
 
-
-        // 如果换成视频控件 记得要把 视频控件的上下滑动给禁掉  避免rv的滑动事件被抢掉
+        // 获取视频最大长度 = 屏幕长度 - 底部固定view的宽度
+        bottomHeight = Utils.dpToPixel(50);
+        final int height = getVideoMaxHeight(bottomHeight);
+        // 初始设置video的高度为最大长度
         final ImageView profile = findViewById(R.id.profile);
+        final ImageView message = findViewById(R.id.message);
         ViewGroup.LayoutParams layoutParams = profile.getLayoutParams();
-        layoutParams.height = height ;
+        ViewGroup.LayoutParams messagelayoutParams = message.getLayoutParams();
+        layoutParams.height = height;
+        messagelayoutParams.height = (int) stickyHeight;
         profile.setLayoutParams(layoutParams);
+        message.setLayoutParams(messagelayoutParams);
 
         // 视频的固定高度
         final float video_height = Utils.dpToPixel(200);
 
         final RecyclerView rv = findViewById(R.id.rv);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(new WeboAdapter(height));
+        rv.setAdapter(new WeboAdapter(height,stickyHeight));
         rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -49,32 +55,42 @@ public class WeboActivity extends AppCompatActivity {
                 totalDy -= dy;
                 ViewGroup.LayoutParams layoutParams = profile.getLayoutParams();
 
-                if(dy  > 0 && layoutParams.height > video_height){
+                if (dy > 0 && layoutParams.height > video_height) {
                     layoutParams.height = layoutParams.height - dy;
-                    if(layoutParams.height < video_height){
+                    if (layoutParams.height < video_height) {
                         layoutParams.height = (int) video_height;
                     }
+
+                    // 如果刚好 现在video的高度是固定高度  则把后面跟随固定view展示出来  做成吸顶效果
+                    if (layoutParams.height == video_height) {
+                        if (message.getVisibility() == View.GONE) {
+                            message.setVisibility(View.VISIBLE);
+                        }
+                    }
                     profile.setLayoutParams(layoutParams);
-                }else if(dy < 0 && layoutParams.height < height ){
+                } else if (dy < 0 && layoutParams.height < height) {
                     // 还未完全收缩
-                    if(layoutParams.height >  video_height){
+                    if (layoutParams.height > video_height) {
 
                         layoutParams.height = layoutParams.height - dy;
-                        if(layoutParams.height >= height){
+                        if (layoutParams.height >= height) {
                             layoutParams.height = height;
                             rv.smoothScrollToPosition(0);
                         }
 
-                        // 已经拖动到最原始状态  保证一定闭合
-                        if(totalDy == 0){
-                            layoutParams.height = height;
-                        }
                         profile.setLayoutParams(layoutParams);
 
 
                         // 已经完全收缩  要先把rv的第1个布局露出(前面还有第0个不局)，才让video往下滑动
-                    }else if(Math.abs(totalDy) - video_height <= video_height){
+                    } else if (Math.abs(totalDy) - video_height <= video_height) {
+
+                        // 第一个露出来了  要把吸顶的布局隐藏
+                        if (message.getVisibility() == View.VISIBLE) {
+                            message.setVisibility(View.GONE);
+                        }
+
                         layoutParams.height = layoutParams.height - dy;
+
                         profile.setLayoutParams(layoutParams);
                     }
 
@@ -83,28 +99,15 @@ public class WeboActivity extends AppCompatActivity {
         });
     }
 
-    public void onBackPressed() {
-        if (GSYVideoManager.backFromWindowFull(this)) {
-            return;
-        }
-        super.onBackPressed();
-    }
+    /**
+     * @return 获取视频最大长度 = 屏幕长度 - 底部固定view的宽度
+     * @param bottomHeight
+     */
+    private int getVideoMaxHeight(float bottomHeight) {
+        WindowManager manager = this.getWindowManager();
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        manager.getDefaultDisplay().getMetrics(outMetrics);
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        GSYVideoManager.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        GSYVideoManager.onResume();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        GSYVideoManager.releaseAllVideos();
+        return (int) (outMetrics.heightPixels - bottomHeight);
     }
 }
